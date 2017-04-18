@@ -1,0 +1,81 @@
+/* Mixins */
+
+.bgimg (@x, @y, @img:"sprite.png", @repeat:no-repeat){ background: url("../images/@{img}") @x @y @repeat; }
+
+.size (@width, @height){width:@width; height:@height;}
+
+.sizexbg (@width; @height; @x; @y; @repeat:no-repeat; @img:"sprite.png") { .bgimg (@x; @y; @img; @repeat;  ); .size (@width; @height); }
+
+.radius (@radius : 4px) { border-radius: @radius; }
+
+.borderRadius(@topleft: 0, @topright: 0, @bottomright: 0, @bottomleft: 0) { border-top-left-radius: @topleft; border-top-right-radius: @topright; border-bottom-right-radius: @bottomright; border-bottom-left-radius: @bottomleft;}
+
+.transition (@ms : 200ms) { -webkit-transition: all @ms ease-in-out; -moz-transition: all @ms ease-in-out; -ms-transition: all @ms ease-in-out; -o-transition: all @ms ease-in-out; transition: all @ms ease-in-out;}
+
+.font(@font-family, @font-size, @color,@font-weight){font-family: @font-family;font-size: @font-size;color:@color;font-weight: @font-weight}
+
+.opacity(@opacity: 0.5) {opacity: @opacity; @opperc: @opacity * 100; filter: ~"alpha(opacity=@{opperc})";}
+
+.placeholder(@color:#999){ &::-webkit-input-placeholder { color:@color; } &::-moz-placeholder { color:@color; } &:-ms-input-placeholder { color:@color; } input :-moz-placeholder { color:@color; }}
+
+.zebra-stripe(@stripeColor: #F0F0F0) { tbody tr:nth-child(2n+1) { background: @stripeColor; }}
+
+.zebra-stripeLi(@stripeColor: #F0F0F0) { li:nth-child(2n+1) { background: @stripeColor; }}
+
+.font-face (@fontName) {
+    @font-face {
+        font-family: '@{fontName}';
+        src: url('../fonts/@{fontName}.eot');
+        src: url('../fonts/@{fontName}.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/@{fontName}.woff') format('woff'),
+             url('../fonts/@{fontName}.ttf') format('truetype'),
+             url('../fonts/@{fontName}.svg#@{fontName}') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+.font-face('starjedi');
+.font-face('caviar_dreams_bold');
+.font-face('caviardreams_bolditalic');
+
+
+@clr-principal: #48455a;
+@clr-featured: #3c465e;
+@clr-bg:#F5F4F2;
+@clr-bg-aside: #ffffff;
+
+.cb{clear:both}
+.fl{float:left}
+.fr{float: right}
+.db{display:block}
+.ib{display:inline-block}
+.up{ text-transform: uppercase}
+.am{ vertical-align: middle;}
+.pointer{ cursor:pointer}
+.limited{ width: 80%; margin: 0 auto;}
+.none{display:none}
+
+.border-posts{ border-bottom: 2px solid @clr-featured;}
+
+*{padding:0;margin:0;outline:none;text-decoration:none; box-sizing:border-box; list-style: none; font-family: 'Roboto', sans-serif;}
+body{  font-family: 'Lato', sans-serif; background-color: #F5F4F2}
+#content{ width: 920px; margin: 0 auto}
+
+
+
+/*
+Início
+*/
+//#principal{ border:1px solid}
+.title{ padding: 70px 0 40px; .font('starjedi',30px, @clr-principal, normal); text-align:center}
+#principal, header{ .limited; 
+    li{ padding: 15px; background: @clr-bg-aside; margin: 8px 0; text-transform: uppercase; 
+        border-left: 5px solid darken(@clr-principal,20%); border-bottom: 1px solid darken(@clr-bg, 8%);
+        .font('caviar_dreams_bold'; 23px; darken(@clr-principal, 20%); normal); cursor: pointer; .transition();
+        &:hover{ background-color: darken(@clr-bg-aside,10%); border-left: 5px solid lighten(@clr-featured,10%); }
+    }
+    div{ .font('caviar_dreams_bold'; 15px; lighten(@clr-principal,10%); normal)}
+    a{ .none}
+}
